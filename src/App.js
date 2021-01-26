@@ -1,5 +1,15 @@
-import dragon from "./img/dragon.png";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyle } from "./styles";
 import { useState } from "react";
+import Monster from "./components/Monster";
+import { AttackButton } from "./styles";
+
+const theme = {
+  mainColor: "#B9B9B9",
+  backgroundColor: "#000000",
+  secondaryColor: "#00AAA9",
+  red: "#FF0000",
+};
 
 function App() {
   let [gold, setGold] = useState(0);
@@ -33,15 +43,20 @@ function App() {
   };
 
   return (
-    <div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <h1 className="text-center">Gold: {gold} </h1>
+      <AttackButton
+        type="button"
+        className="btn btn-lg btn-outline-danger"
+        onClick={attack}
+      >
+        Attack
+      </AttackButton>
       <br />
-      <h1>Gold: {gold} </h1>
-      <br />
-      <button onClick={attack}>Attack</button>
-      <br />
-      <img src={dragon} alt="dragon" />
-      <h1>Hp: {hp} </h1>
-    </div>
+      <Monster />
+      <h1 className="text-center">Hp: {hp} </h1>
+    </ThemeProvider>
   );
 }
 
