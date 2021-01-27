@@ -2,6 +2,8 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./styles";
 import { useState } from "react";
 import Monster from "./components/Monster";
+import WeaponList from "./components/WeaponList";
+
 import { AttackButton } from "./styles";
 
 const theme = {
@@ -13,6 +15,7 @@ const theme = {
 
 function App() {
   let [gold, setGold] = useState(0);
+  let [damage, setDamage] = useState(1);
   let [hp, setHp] = useState(5);
 
   const addGold = (goldGained) => {
@@ -29,6 +32,8 @@ function App() {
       setHp(15);
     } else if (gold >= 20 && gold <= 30) {
       setHp(20);
+    } else if (gold > 30) {
+      setHp(30);
     }
   };
 
@@ -42,20 +47,43 @@ function App() {
     }
   };
 
+  const upgardeWeapon = (weapon) => {
+    if (weapon.price <= gold) {
+      setGold((gold -= weapon.price));
+      setDamage(weapon.damage);
+      weapon.sold = true;
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <h1 className="text-center">Gold: {gold} </h1>
-      <AttackButton
-        type="button"
-        className="btn btn-lg btn-outline-danger"
-        onClick={attack}
-      >
-        Attack
-      </AttackButton>
       <br />
-      <Monster />
-      <h1 className="text-center">Hp: {hp} </h1>
+      <div className="container">
+        <div className="row">
+          <div className="col-md">
+            <WeaponList
+              gold={gold}
+              upgardeWeapon={upgardeWeapon}
+              damage={damage}
+            />
+          </div>
+          <div className="col-md">
+            <h1 className="text-center">Gold: {gold} </h1>
+            <h1 className="text-center">Damage: {damage} </h1>
+            <AttackButton
+              type="button"
+              className="btn btn-lg btn-outline-danger"
+              onClick={attack}
+            >
+              Attack
+            </AttackButton>
+            <Monster />
+            <h1 className="text-center">Hp: {hp} </h1>
+          </div>
+          <div className="col-md">One of three columns</div>
+        </div>
+      </div>
     </ThemeProvider>
   );
 }
