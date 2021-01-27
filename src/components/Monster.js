@@ -1,6 +1,4 @@
 import { MonsterImage } from "../styles";
-import monsters from "../monsters";
-import { useState } from "react";
 
 const Monster = (props) => {
   let currentMonster = props.currentMonster;

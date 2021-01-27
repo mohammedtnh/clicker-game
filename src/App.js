@@ -97,7 +97,9 @@ function App() {
             <Monster currentMonster={currentMonster} />
             <h1 className="text-center">Hp: {hp} </h1>
           </div>
-          <div className="col-md">Buffs</div>
+          <div className="col-md">
+            <h2>Hire a Hero</h2>
+          </div>
         </div>
       </div>
     </ThemeProvider>
