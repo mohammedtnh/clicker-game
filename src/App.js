@@ -39,8 +39,8 @@ function App() {
 
   const attack = () => {
     if (hp > 0) {
-      setHp((hp += -1));
-      if (hp === 0) {
+      setHp((hp -= damage));
+      if (hp <= 0) {
         addGold(1);
         hpControl();
       }
